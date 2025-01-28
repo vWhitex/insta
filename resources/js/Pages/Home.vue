@@ -3,7 +3,7 @@
       <!-- Sidebar -->
       <aside class="w-1/5 p-6 space-y-10 border-r border-gray-800 py-10 ">
         <h1 class="text-2xl font-bold">Instagram</h1>
-        <nav class="flex flex-grow-0 flex-col space-y-2">
+        <nav class="flex flex-col space-y-3.5">
           <button class="custom-button flex items-center space-x-3 text-lg rounded-lg hover:bg-onhovergray p-2">
             <HomeIcon class="w-6 h-6" />
             <span>Home</span>
@@ -40,7 +40,7 @@
       </aside>
   
       <!-- Main Content -->
-      <main class="flex-grow-7 p-6 space-y-2">
+      <main class="flex-grow p-6 space-y-2 place-self-center">
         <!-- Header Section -->
          <header class="flex items-start gap-4 font-bold pt-6 text-sm">
             <button>For You</button>
@@ -55,10 +55,43 @@
         </div>
   
         <!-- Post Section -->
-        <div class="bg-gray-900 p-4 rounded-xl">
-          <p class="text-gray-400">thatgoodjdmshit · 23h</p>
-          <div class="mt-4 w-full h-64 bg-gray-700 rounded-lg"></div>
-        </div>
+        <post class="flex flex-col justify-center items-center space-y-4 text-white text-sm">
+
+          <div class="bg-transparent border-1 border-white w-[450px] h-[520px] shrink p-4 rounded-xl mt-8 ">
+            <div class="flex flex-row gap-2">
+              <div class=" w-10 h-10 rounded-full bg-gray-700 "></div>
+              <p class="place-self-center font-bold">asdasdasd</p>
+              <p class="place-self-center text-gray-400 ">· 23h</p>
+              <button type="btn" class="text-right place-self-end ">···</button>
+            </div>
+            <div class="mt-4 w-full h-64 bg-gray-700 rounded-s"></div>
+            <div class="flex justify-between py-3 flex-col">
+
+              <!-- CardBottom -->
+               <!-- Icons -->
+              <div class="flex space-x-4">
+                <HeartIcon class="w-6 h-6 cursor-pointer" />
+                <MessageCircleIcon class="w-6 h-6 cursor-pointer" />
+                <SendIcon class="w-6 h-6 cursor-pointer" />
+                <BookmarkIcon class="w-6 h-6 cursor-pointer justify-end" />
+              </div>
+
+            <!-- Likes -->
+              <div>
+                <p class="text-sm font-bold ">447 likes</p>
+              </div>
+            </div>
+            
+          </div>
+
+          <div class="bg-transparent w-[450px] h-[520px] shrink p-4 rounded-xl mt-8">
+            <p class="text-gray-400">fgfgfgfgfg · 14h</p>
+            <div class="mt-4 w-full h-64 bg-gray-700 rounded-lg"></div>
+            
+          </div>
+        </post>
+
+        
       </main>
   
       <!-- Right Panel -->
@@ -66,8 +99,8 @@
         <div class="flex items-center mb-6">
           <div class="w-12 h-12 rounded-full bg-gray-700"></div>
           <div class="ml-4">
-            <p class="font-bold">jafankin</p>
-            <p class="text-gray-400 text-sm">Arhip Jafankin</p>
+            <p class="font-bold">user</p>
+            <p class="text-gray-400 text-sm">User User</p>
           </div>
         </div>
   
@@ -94,6 +127,8 @@
     HeartIcon,
     SquarePlusIcon,
     UserIcon,
+    MessageCircleIcon,
+    BookmarkIcon,
   } from 'lucide-vue-next';
   
   export default {
@@ -106,6 +141,8 @@
       HeartIcon,
       SquarePlusIcon,
       UserIcon,
+      MessageCircleIcon,
+      BookmarkIcon,
     },
   };
   </script>
