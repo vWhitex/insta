@@ -1,7 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 @import "tailwindcss";
-@import './fonts.css';
+@source "../views";
 
-
+@theme {
+    --color-onhovergray: #242424;
+}
