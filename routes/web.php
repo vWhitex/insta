@@ -18,3 +18,23 @@ Route::get('/explore', function () {
 Route::get('/messages', function () {
     return Inertia::render('Messages');
 })->name('Messages');
+
+Route::get('/notifications', function () {
+    return Inertia::render('Notifications');
+})->name('Notifications');
+
+Route::get('/profile', function () {
+    return Inertia::render('Profile');
+})->name('Profile');
+
+Route::get('/search', function () {
+    return Inertia::render('Search');
+})->name('Search');
+
+Route::get('/reels', function () {
+    return Inertia::render('Reels');
+})->name('Reels');
+
+Route::get('/create', function () {
+    return Inertia::render('Create');
+})->name('Create');

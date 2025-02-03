@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        @routes
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         @vite('resources/css/app.css')
@@ -14,7 +15,7 @@
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         @inertiaHead
     </head>
-    <body class="font-sans" style=" background-color: black; color: white;">
+    <body class="font-sans overflow-hidden" style=" background-color: black; color: white;">
         @inertia
     </body>
 </html>

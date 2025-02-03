@@ -4,10 +4,10 @@
       <aside class="w-1/5 p-6 space-y-10 border-r border-gray-800 py-10 ">
         <h1 class="text-2xl font-bold">Instagram</h1>
         <nav class="flex flex-col space-y-3.5">
-          <button class="custom-button flex items-center space-x-3 text-lg rounded-lg hover:bg-onhovergray p-2">
+          <a :href="route('Home')" class="custom-button flex items-center space-x-3 text-lg rounded-lg hover:bg-onhovergray p-2">
             <HomeIcon class="w-6 h-6" />
             <span>Home</span>
-          </button>
+          </a>
           <button class="custom-button flex items-center space-x-3 text-lg rounded-lg hover:bg-onhovergray p-2">
             <SearchIcon class="w-6 h-6" />
             <span>Search</span>
@@ -38,7 +38,7 @@
           </button>
         </nav>
       </aside>
-  
+
       <!-- Main Content -->
       <main class="flex-grow p-6 space-y-2 place-self-center items-center shrink place-content-center">
         <!-- Header Section -->
@@ -53,7 +53,7 @@
             <span>Story</span>
           </div>
         </div>
-  
+
         <!-- Post Section -->
         <post class="flex flex-col justify-center items-center space-y-4  text-white text-sm">
 
@@ -72,19 +72,19 @@
                <div class="">
                 <div class="flex space-x-4 mb-2">
                     <HeartIcon class="w-6 h-6 cursor-pointer hover:text-gray-400" />
-                    <MessageCircleIcon class="w-6 h-6 cursor-pointer hover:text-gray-400" 
+                    <MessageCircleIcon class="w-6 h-6 cursor-pointer hover:text-gray-400"
                     @click="showPopupCommentsSection = true"
                     />
                     <SendIcon class="w-6 h-6 cursor-pointer hover:text-gray-400" />
                     <BookmarkIcon class="w-6 h-6 cursor-pointer hover:text-gray-400 ml-auto" />
                 </div>
                 <p class=" font-bold">X,XXX likes</p>
-                <p><span class="font-bold">account</span> text text text text</p>  <!-- to add :if text too long : ...more -->  
-                <p class="text-gray-400 text-sm">View all XXX comments</p>      <!-- to add :like counter -->  
+                <p><span class="font-bold">account</span> text text text text</p>  <!-- to add :if text too long : ...more -->
+                <p class="text-gray-400 text-sm">View all XXX comments</p>      <!-- to add :like counter -->
                 <div class="flex items-center mt-2">
-                    <input 
-                    type="text" 
-                    class="w-full bg-transparent text-white focus:outline-none" 
+                    <input
+                    type="text"
+                    class="w-full bg-transparent text-white focus:outline-none"
                     placeholder="Add a comment..."
                     />
                 </div>
@@ -104,16 +104,16 @@
             </div>
         </div>
 
-        
-            
-          
+
+
+
         </post>
 
-        
+
       </main>
     </div>
   </template>
-  
+
   <script>
   import {
     HomeIcon,
@@ -129,7 +129,7 @@
     SendIcon,
     BookmarkIcon,
   } from 'lucide-vue-next';
-  
+
   export default {
     components: {
         HomeIcon,
@@ -147,7 +147,7 @@
     },
   };
   </script>
-  
+
   <style>
   body {
     font-family: 'Instagram Sans', sans-serif;
@@ -168,4 +168,3 @@
   color: gray;
 }
   </style>
-  
