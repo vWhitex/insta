@@ -57,7 +57,7 @@
             </main>
 
             <!-- Right Panel -->
-            <aside class="w-1/5 p-4">
+            <aside class="w-1/5 p-4 ">
                 <div class="flex items-center mb-6">
                     <div class="w-12 h-12 rounded-full bg-gray-700"></div>
                     <div class="ml-4">
@@ -91,3 +91,24 @@ import {
     SendIcon,
 } from 'lucide-vue-next';
 </script>
+
+<style>
+body {
+    font-family: 'Instagram Sans', sans-serif;
+}
+
+.custom-button {
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+/*.custom-button:hover {
+  box-shadow: 0px 0px 10px 3px rgba(255, 255, 255, 0.6);
+}
+*/
+
+.custom-button:active {
+    background-color: transparent;
+    color: gray;
+}
+</style>
