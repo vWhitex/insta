@@ -1,17 +1,22 @@
 <template>
   <MessagesLayout>
     <div class="flex flex-col">
-      <div v-for="i in 1" :key="i" class="flex items-center p-4 border-b border-gray-700">
-                <div class="w-14 h-14 rounded-full bg-gray-700"></div>
-                <div class="ml-4 flex-grow">
+      <div v-for="i in 1" :key="i" class="flex items-center p-3 border-b border-gray-700">
+                <div class="size-12 rounded-full bg-gray-700"></div>
+                <a class="ml-4 flex-grow ">
                     <p class="text-sm font-bold">User {{ i }}</p>
                     <p class="text-xs text-gray-400">Active {{ i }}</p>
-                </div>
+                </a>
+                    <div class="flex flex-row gap-4">
+                        <Phone class="w-6 h-6" />
+                        <Videotape class="w-6 h-6" />
+                        <Info class="w-6 h-6" />
+                    </div>
             </div>
             <div>
 
             </div>
-      
+
     </div>
 
   </MessagesLayout>
@@ -19,7 +24,12 @@
 
 <script setup>
 import MessagesLayout from '../Layouts/MessagesLayout.vue';
-
+import {
+    Phone,
+    Videotape,
+    Info,
+}
+from 'lucide-vue-next';
 
 </script>
 

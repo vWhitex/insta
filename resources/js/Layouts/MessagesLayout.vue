@@ -17,7 +17,7 @@
                 </a>
                 <a :href="route('Explore')"
                     class="custom-button flex items-center space-x-3 text-lg rounded-lg hover:bg-onhovergray p-2">
-                    <CompassIcon class="w-6 h-6" />
+                    <Compass class="w-6 h-6" />
                 </a>
                 <a :href="route('Reels')"
                     class="custom-button flex items-center space-x-3 text-lg rounded-md hover:bg-onhovergray p-2">
@@ -46,19 +46,19 @@
 
 
         <!-- LeftMessageAccounts [need to make it fixed, also continue in messages.vue caht part]-->
-        <left class=" max-h-screen overflow-auto w-1/5 border-r border-gray-800">
-            <!-- AccoutChoser -->
-            <div class="flex flex-row mb-0 justify-between pl-4">
-                <h1 class="text-xl font-bold mt-8 mb-0">jafankin</h1>
+        <div class=" max-h-screen overflow-visible w-full max-w-[400px] min-w-[400px] border-r border-gray-800">
+            <!-- AccountChoser -->
+            <div class="flex flex-row mb-0 justify-between pl-4 ">
+                <h1 class="text-xl font-bold mt-8 mb-0 ">jafankin</h1>
                 <a class="custom-button flex items-center space-x-3 text-lg rounded-md p-2">
                     <SquarePenIcon class="w-6 h-6" />
                 </a>
             </div>
 
             <!-- Notes -->
-            <div class="flex flex-col">
+            <div v-if="isBelow40" class="flex flex-col">
                 <div class="flex space-x-6 m-4 mt-14">
-                    <div v-for="i in 2" :key="i" class="flex flex-col items-center">
+                    <div v-for="i in 4" :key="i" class="flex flex-col items-center">
                         <div class="w-18 h-18 rounded-full bg-gray-700"></div>
                         <p class="text-gray-400 text-xs mt-2">User</p>
                     </div>
@@ -68,18 +68,18 @@
             <!-- Messages -->
             <div class="flex justify-between mb-2 mt-2 mx-4 ">
                 <a class=" text-sm font-bold">Messages</a>
-                <p class="text-gray-400 text-xs font-bold ">Requests</p>
+                <p class="text-gray-400 text-xs font-bold">Requests</p>
             </div>
             <div v-for="i in 5" :key="i" class="flex items-center p-2 pl-4">
                 <div class="w-14 h-14 rounded-full bg-gray-700"></div>
                 <div class="ml-4 flex-grow">
-                    <p class="text-sm font-bold">User {{ i }}</p>
-                    <p class="text-xs text-gray-400">Active {{ i }}</p>
+                    <p class="text-sm font-bold ">User {{ i }}</p>
+                    <p class="text-xs text-gray-400 ">Active {{ i }}</p>
                 </div>
             </div>
-        </left>
+        </div>
 
-        <main class="">
+        <main class="w-full">
             <slot>
 
             </slot>
@@ -94,7 +94,7 @@ import {
     Instagram,
     HomeIcon,
     SearchIcon,
-    CompassIcon,
+    Compass,
     VideoIcon,
     HeartIcon,
     SquarePlusIcon,
@@ -102,6 +102,49 @@ import {
     SendIcon,
     SquarePenIcon,
 } from 'lucide-vue-next';
+
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+
+const isBelow40 = ref(false);
+
+// Fixed threshold based on 40% of the initial screen width
+let threshold = 0;
+
+// Function to check screen width (if > 40% of the screen width)
+function checkScreenWidth() {
+  const fullWidth = window.innerWidth;
+
+  // Compare screen width with 40% of the initial screen width
+  if (fullWidth > threshold) {
+    isBelow40.value = true; // Show the div if width is greater than 40%
+  } else {
+    isBelow40.value = false; // Hide the div if width is smaller than 40%
+  }
+
+  // Debugging logs
+  console.log('Threshold:', threshold);
+  console.log('Current Screen Width:', fullWidth);
+  console.log('isBelow40:', isBelow40.value);
+}
+
+// Set the threshold on mount based on the initial screen size
+onMounted(() => {
+  threshold = window.innerWidth * 0.4;  // 40% of the initial screen width
+  checkScreenWidth(); // Initial check
+  window.addEventListener('resize', checkScreenWidth); // Add resize event listener
+});
+
+// Initial check when the component is mounted
+onMounted(() => {
+  checkScreenWidth(); // Check screen width on mount
+  window.addEventListener('resize', checkScreenWidth); // Add resize event listener
+});
+
+// Clean up the event listener on component unmount
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', checkScreenWidth); // Clean up event listener
+});
+
 </script>
 
 <style>
