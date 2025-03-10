@@ -1,101 +1,100 @@
 <template>
-
     <HomeLayout>
         <!-- Main Content -->
-        <main class="flex-grow p-6 space-y-2 place-self-center items-center shrink place-content-center">
+        <main class="flex flex-col items-center w-full max-w-xl mx-auto">
             <!-- Header Section -->
-            <header class="flex items-start gap-4 font-bold pt-6 text-sm shrink ">
-                <button>For You</button>
-                <button>Following</button>
+            <header
+                class="flex items-center justify-start w-full font-bold pt-12 text-sm border-b border-gray-800 pb-2">
+                <div class="flex gap-8">
+                    <button class="focus:border-b-2 focus:border-white pb-1 ">For You</button>
+                    <button class="focus:border-b-2 focus:border-white pb-1">Following</button>
+                </div>
             </header>
 
             <!-- Stories Section -->
-            <div class="flex space-x-4 overflow-x-auto shrink p-4 pb-4 border-t border-gray-800">
-                <div v-for="i in 8" :key="i"
-                    class="w-16 h-16 rounded-full bg-gray-700 flex items-center justify-center">
-                    <span>Story</span>
+            <div class="flex space-x-4 overflow-x-auto w-full py-4 px-2 max-w-xl">
+                <div v-for="i in 8" :key="i" class="flex flex-col items-center space-y-1 flex-shrink-0">
+                    <div
+                        class="w-16 h-16 rounded-full bg-gray-700 flex items-center justify-center ring-2 ring-pink-500">
+                        <span>Story</span>
+                    </div>
+                    <span class="text-xs text-gray-400">User_{{ i }}</span>
                 </div>
             </div>
 
-            <!-- Post Section -->
-            <post class="flex flex-col justify-center items-center space-y-4  text-white text-sm">
+            <div v-if="loading" class="py-4 text-center w-full">
+      <p>Loading posts...</p>
+    </div>
 
-                <div class="bg-transparent shrink p-4 pb-4 border-b border-gray-800">
-                    <div class="flex flex-row gap-2">
-                        <div class=" w-10 h-10 rounded-full bg-gray-700 "></div>
-                        <p class="place-self-center font-bold">asdasdasd</p>
-                        <p class="place-self-center text-gray-400 ">· 23h</p>
-                        <button type="btn" class="text-right place-self-end ">···</button>
-                    </div>
-                    <div class="mt-4 w-[460px] h-[650px] bg-black/85 rounded-sm border-1 border-gray-800"></div>
-                    <div class="flex justify-between py-3 flex-col">
+            <div v-else class="flex flex-col justify-center items-center space-y-4  text-white text-sm">
 
-                        <!-- CardBottom -->
-                        <!-- Icons -->
-                        <div class="">
-                            <div class="flex space-x-4 mb-2">
-                                <HeartIcon class="w-6 h-6 cursor-pointer hover:text-gray-400" />
-                                <MessageCircleIcon class="w-6 h-6 cursor-pointer hover:text-gray-400" />
-                                <SendIcon class="w-6 h-6 cursor-pointer hover:text-gray-400" />
-                                <BookmarkIcon class="w-6 h-6 cursor-pointer hover:text-gray-400 ml-auto" />
-                            </div>
-                            <p class=" font-bold">X,XXX likes</p>
-                            <p><span class="font-bold">account</span> text text text text</p>
-                            <!-- to add :if text too long : ...more -->
-                            <p class="text-gray-400 text-sm">View all XXX comments</p> <!-- to add :like counter -->
-                            <div class="flex items-center mt-2">
-                                <input type="text" class="w-full bg-transparent text-white focus:outline-none"
-                                    placeholder="Add a comment..." />
-                            </div>
-                        </div>
-                    </div>
+                <div v-if="posts.length === 0" class="text-center py-8">
+                    <p>No posts found</p>
                 </div>
-            </post>
-            <post class="flex flex-col justify-center items-center space-y-4  text-white text-sm">
+                <Post v-for="post in posts" :key="post.id" :post="post" />
 
-                <div class="bg-transparent shrink p-4 pb-4 border-b border-gray-800">
-                    <div class="flex flex-row gap-2">
-                        <div class=" w-10 h-10 rounded-full bg-gray-700 "></div>
-                        <p class="place-self-center font-bold">asdasdasd</p>
-                        <p class="place-self-center text-gray-400 ">· 23h</p>
-                        <button type="btn" class="text-right place-self-end ">···</button>
-                    </div>
-                    <div class="mt-4 w-[460px] h-[650px] bg-black/85 rounded-sm border-1 border-gray-800"></div>
-                    <div class="flex justify-between py-3 flex-col">
-
-                        <!-- CardBottom -->
-                        <!-- Icons -->
-                        <div class="">
-                            <div class="flex space-x-4 mb-2">
-                                <HeartIcon class="w-6 h-6 cursor-pointer hover:text-gray-400" />
-                                <MessageCircleIcon class="w-6 h-6 cursor-pointer hover:text-gray-400" />
-                                <SendIcon class="w-6 h-6 cursor-pointer hover:text-gray-400" />
-                                <BookmarkIcon class="w-6 h-6 cursor-pointer hover:text-gray-400 ml-auto" />
-                            </div>
-                            <p class=" font-bold">X,XXX likes</p>
-                            <p><span class="font-bold">account</span> text text text text</p>
-                            <!-- to add :if text too long : ...more -->
-                            <p class="text-gray-400 text-sm">View all XXX comments</p> <!-- to add :like counter -->
-                            <div class="flex items-center mt-2">
-                                <input type="text" class="w-full bg-transparent text-white focus:outline-none"
-                                    placeholder="Add a comment..." />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </post>
+            </div>
         </main>
     </HomeLayout>
 </template>
 
 <script setup>
-const axios = import('axios');
+import axios from 'axios';
 import {
     HeartIcon,
     MessageCircleIcon,
     SendIcon,
     BookmarkIcon,
 } from 'lucide-vue-next';
+import { ref, onMounted, watch } from 'vue';
 import HomeLayout from '@/Layouts/HomeLayout.vue';
+import Post from '@/Components/Post.vue';
 
+const posts = ref([]);
+const users = ref([]);
+const loading = ref(true);
+const activeTab = ref('for-you');
+
+// Fetch posts and users on component mount
+onMounted(async () => {
+  try {
+    // Fetch posts with their relationships
+    const postsResponse = await axios.get('/api/posts', {
+      params: {
+        with: ['user', 'comments.user', 'likes_count'],
+        per_page: 10,
+        page: 1
+      }
+    });
+    posts.value = postsResponse.data.data;
+
+    // Fetch users for stories
+    const usersResponse = await axios.get('/api/users');
+    users.value = usersResponse.data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  } finally {
+    loading.value = false;
+  }
+});
+
+// Watch for tab changes to load different content
+watch(activeTab, async (newTab) => {
+  loading.value = true;
+  try {
+    const endpoint = newTab === 'following' ? '/api/posts/following' : '/api/posts';
+    const response = await axios.get(endpoint, {
+      params: {
+        with: ['user', 'comments.user', 'likes_count'],
+        per_page: 10,
+        page: 1
+      }
+    });
+    posts.value = response.data.data;
+  } catch (error) {
+    console.error('Error fetching posts for tab:', error);
+  } finally {
+    loading.value = false;
+  }
+});
 </script>

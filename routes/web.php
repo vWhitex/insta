@@ -38,3 +38,6 @@ Route::get('/reels', function () {
 Route::get('/create', function () {
     return Inertia::render('Create');
 })->name('Create');
+
+
+

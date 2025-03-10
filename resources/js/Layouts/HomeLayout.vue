@@ -3,7 +3,7 @@
       <!-- Left Sidebar -->
       <aside class="sidebar w-1/5 p-6 space-y-10 border-r border-gray-800 py-10">
         <h1 class="text-2xl font-bold logo">Instagram</h1>
-        <nav class="flex flex-col space-y-3.5">
+        <nav class="flex flex-col space-y-3.5 place-content-center">
           <a :href="route('Home')"
             class="custom-button flex items-center space-x-3 text-lg rounded-lg hover:bg-onhovergray p-2">
             <HomeIcon class="nav-icon w-6 h-6 min-w-6 min-h-6" />
@@ -164,6 +164,9 @@
   onUnmounted(() => {
     window.removeEventListener('resize', checkWindowSize);
   });
+
+
+
   </script>
 
   <style>
